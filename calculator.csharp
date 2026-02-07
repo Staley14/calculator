@@ -1,0 +1,96 @@
+using System;
+
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        bool keepRunning = true;
+
+        while (keepRunning)
+        {
+            int num1 = ReadInteger("Enter first number: ");
+            int num2 = ReadInteger("Enter second number: ");
+
+            char operation;
+            double? result = null;
+
+          
+            while (true)
+            {
+                Console.Write("Choose operation (+, -, *, /, %, =) : ");
+                operation = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+
+                if ("+-*/%=".Contains(operation))
+                    break;
+
+                Console.WriteLine("Incorrect Operation Used, please try again");
+            }
+
+            if (operation == '=')
+            {
+                keepRunning = false;
+                Console.WriteLine("Program terminated.");
+            }
+            else
+            {
+                result = Calculate(num1, num2, operation);
+
+                if (result != null)
+                    Console.WriteLine("Result: " + result);
+            }
+
+            Console.WriteLine();
+        }
+    }
+
+  
+    public static int ReadInteger(string message)
+    {
+        int value;
+
+        while (true)
+        {
+            Console.Write(message);
+            string input = Console.ReadLine();
+
+            if (int.TryParse(input, out value))
+                return value;
+
+            Console.WriteLine("Invalid input. Please enter a whole number.");
+        }
+    }
+
+    public static double? Calculate(int first, int second, char operation)
+    {
+        switch (operation)
+        {
+            case '+':
+                return first + second;
+
+            case '-':
+                return first - second;
+
+            case '*':
+                return first * second;
+
+            case '/':
+                if (second == 0)
+                {
+                    Console.WriteLine("Cannot divide by zero");
+                    return null;
+                }
+                return (double)first / second;
+
+            case '%':
+                if (second == 0)
+                {
+                    Console.WriteLine("Cannot modulo by zero");
+                    return null;
+                }
+                return first % second;
+        }
+
+        return null;
+    }
+}
