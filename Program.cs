@@ -17,7 +17,7 @@ public class HelloWorld
           
             while (true)
             {
-                Console.Write("Choose operation (+, -, *, /, %, 😊 : ");
+                Console.Write("Choose operation (+, -, *, /, %, = : ");
                 operation = Console.ReadLine();
                 Console.WriteLine();
 
